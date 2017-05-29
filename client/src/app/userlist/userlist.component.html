@@ -1,0 +1,14 @@
+<div class="row" *ngFor="let user of users_list">
+  <div class="col-sm-4">
+    <span>{{user.name}}</span>
+  </div>
+
+  <div class="col-sm-4">
+    <span>{{user.lat}} </span>
+  </div>
+
+  <div class="col-sm-4">
+    <span>{{user.date | formatDate}}</span>
+  </div>
+
+</div>

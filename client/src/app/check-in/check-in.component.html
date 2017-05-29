@@ -1,0 +1,23 @@
+
+<div class="col-md-2 col-md-offset-5">
+  <input class="btn btn-large big_blkbtn hide_margtp_35_a" id="cancel_profile_changes" type="button" value="Check-in Now" href="#modal-dialog" data-toggle="modal">
+</div>
+
+<div id="modal-dialog" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
+        <h3>Please enter new name</h3>
+      </div>
+      <div class="modal-body">
+        <p>New Name:</p>
+        <input id="name" #name type="text">
+      </div>
+      <div class="modal-footer">
+        <a href="#" (click)="checkIn()" class="btn confirm">OK</a>
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
