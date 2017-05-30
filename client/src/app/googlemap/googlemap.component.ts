@@ -31,7 +31,6 @@ export class GooglemapComponent implements OnInit {
     if (currentUser) {
       this.setGeoLocations(position[0], position[1]);
     }
-
   }
 
   setGeoLocations(latitude, longitude) {

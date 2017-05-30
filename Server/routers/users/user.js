@@ -6,11 +6,13 @@ var User = require('../../models/users/user');
 
 // create a new user called chris
 
-router.get('/', function (req, res) {
-    User.getUsers().then(result => {
+router.post('/nearby', function (req, res) {
+    var lat = req.body.lat;
+    var lng = req.body.lng;
+    var id = req.body.id;
+    User.getUsers(lat, lng, id).then(result => {
         res.send(result);
     })
-
 });
 
 router.post('/', function (req, res) {

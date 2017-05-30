@@ -1,14 +1,14 @@
 <div class="row text-center" *ngFor="let user of users_list">
   <div class="col-md-3">
-    <span>{{ user.name }}</span>
+    <span>{{user.obj.name}}</span>
   </div>
 
   <div class="col-md-5">
-    <span> 12 </span>
+    <span>{{(user.dis/1000).toFixed(3)}} </span>
   </div>
 
   <div class="col-md-3">
-    <span>{{ user.date | formatDate }}</span>
+    <span>{{user.obj.date | formatDate}}</span>
   </div>
   <hr/>
 </div>

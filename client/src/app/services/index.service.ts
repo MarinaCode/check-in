@@ -10,24 +10,28 @@ export class IndexService {
   private headers = new Headers({'Content-Type': 'application/json'});
   private serverUrl = environment.apiUrl;  // URL to web api
   public notifierSubjectsetLocations: any = new Subject();
+  public notifierSubjectUpdateList: any = new Subject();
 
   constructor(private http: HttpClient ) {
-
   }
 
   public notifyApplyLocations(position) {
     this.notifierSubjectsetLocations.next(position);
   }
 
-  getUsers(): Observable<any> {
-    return this.http.get(this.serverUrl + "user")
+  public notifyUpdateList() {
+    this.notifierSubjectUpdateList.next();
+  }
+
+  getUsers(lat, lng, id): Observable<any> {
+    return this.http.post(this.serverUrl + "user/nearby", JSON.stringify({lat: lat, lng: lng, id: id}))
       .map(response=> {
         return response.json();
       })
   }
 
   checkIn(name, latitude, longitude): Observable<any> {
-    return this.http.post(this.serverUrl + "user", JSON.stringify({name: name, lat:latitude, lng:longitude }))
+    return this.http.post(this.serverUrl + "user", JSON.stringify({name: name, lat: latitude, lng: longitude }))
       .map(response=> {
         return response.json();
       })

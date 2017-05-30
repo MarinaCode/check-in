@@ -22,7 +22,7 @@ User.saveData = function(name, lat, lng) {
     var deferred = defer();
     var user = new User({
         name: name,
-        loc: [lat,lng]
+        loc: [lat, lng]
     });
 
     user.save().then(result => {
@@ -37,7 +37,7 @@ User.updateData = function(id, name, lat, lng) {
     var deferred = defer();
     var user = {
         name: name,
-        loc: [lat,lng]
+        loc: [lat, lng]
     };
 
     User.findOneAndUpdate(
@@ -54,10 +54,18 @@ User.updateData = function(id, name, lat, lng) {
 
     return deferred.promise;
 }
-User.getUsers = function() {
+
+User.getUsers = function(lat, lng, id) {
     var deferred = defer();
-    User.find().then(result => {
-        deferred.resolve(result);
+    var allData = [];
+    User.geoNear( [lat, lng], {
+        spherical: true, num: 999,  maxDistance : 1000/6378137,
+        distanceMultiplier: 6378137
+    }).then(result => {
+        var filteredArray = result.filter((el, index, ar) => {
+            return el.obj._id != id;
+        })
+        deferred.resolve(filteredArray)
     })
     return deferred.promise;
 }
