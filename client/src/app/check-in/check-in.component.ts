@@ -16,26 +16,32 @@ export class CheckInComponent implements OnInit {
   }
 
   checkIn() {
-   var name = this.name.nativeElement.value;
+    var name = this.name.nativeElement.value;
     if (name.length > 0 && name.length <= 50 && /^[a-zA-Z]+$/.test(name)) {
       navigator.geolocation.getCurrentPosition((position)=> {
         if (localStorage.getItem("currentUser") == null) {
           this.indexService.checkIn(name, position.coords.latitude, position.coords.longitude).subscribe((result) => {
             localStorage.setItem("currentUser", JSON.stringify(result));
             this.name.nativeElement.value = JSON.parse(localStorage.getItem("currentUser")).name;
-            this.indexService.notifyApplyLocations(position, this.name.nativeElement.value);
+            this.indexService.notifyApplyLocations({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            });
           })
         } else {
           var id = JSON.parse(localStorage.getItem("currentUser"))._id;
           this.indexService.updateCheckIn(id, name, position.coords.latitude, position.coords.longitude).subscribe((result) => {
             localStorage.setItem("currentUser", JSON.stringify(result));
             this.name.nativeElement.value = JSON.parse(localStorage.getItem("currentUser")).name;
-            this.indexService.notifyApplyLocations(position, this.name.nativeElement.value);
+            this.indexService.notifyApplyLocations({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            });
           })
         }
       });
     } else {
-    //TODO show error
+      //TODO show error
     }
   }
 }

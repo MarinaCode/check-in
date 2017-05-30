@@ -15,8 +15,8 @@ export class IndexService {
 
   }
 
-  public notifyApplyLocations(position: any, name: string) {
-    this.notifierSubjectsetLocations.next(position, name);
+  public notifyApplyLocations(position) {
+    this.notifierSubjectsetLocations.next(position);
   }
 
   getUsers(): Observable<any> {

@@ -12,7 +12,7 @@ export class GooglemapComponent implements OnInit {
   map: any;
 
   constructor(private indexService: IndexService) {
-    this.indexService.notifierSubjectsetLocations.subscribe((position,name) => {this.setGeoLocations(position, name)});
+    this.indexService.notifierSubjectsetLocations.subscribe((position) => {this.setGeoLocations(position.latitude, position.longitude)});
   }
 
   ngOnInit() {
@@ -28,11 +28,14 @@ export class GooglemapComponent implements OnInit {
 
     }
     this.map = new google.maps.Map(document.getElementById('map'), options);
+    if (currentUser) {
+      this.setGeoLocations(position[0], position[1]);
+    }
 
   }
 
-  setGeoLocations(position, name) {
-    var geolocate = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  setGeoLocations(latitude, longitude) {
+    var geolocate = new google.maps.LatLng(latitude, longitude);
 
     var marker = new google.maps.Marker({
       position: geolocate,
