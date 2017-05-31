@@ -20,3 +20,5 @@ npm install
 npm start
 ```
 You need to have mongoDB
+
+Navigate to http://localhost:3000 for REST calls
