@@ -1,0 +1,23 @@
+<div class="text-center">
+  <input  class="btn btn-primary"  id="cancel_profile_changes" type="button" value="Check-in Now" href="#modal-dialog" data-toggle="modal">
+</div>
+
+<div id="modal-dialog" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>
+        <h3>Please enter new name</h3>
+      </div>
+      <div class="modal-body">
+        <p>New Name:</p>
+        <input id="name" #name type="text"  class="form-control"  (keyup)="onKey($event)" >
+        <label #errorLabel></label>
+      </div>
+      <div class="modal-footer">
+        <a href="#" (click)="checkIn()" class="btn btn-large btn-primary  confirm">OK</a>
+        <a href="#" data-dismiss="modal" #cancel aria-hidden="true" class="btn btn-secondary btn">Cancel</a>
+      </div>
+    </div>
+  </div>
+</div>
