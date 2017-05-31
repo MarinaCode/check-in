@@ -1,0 +1,19 @@
+{
+  "name": "check-in",
+  "version": "1.0.0",
+  "description": "check-in",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarinaCode/check-in.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarinaCode/check-in/issues"
+  },
+  "homepage": "https://github.com/MarinaCode/check-in#readme"
+}
