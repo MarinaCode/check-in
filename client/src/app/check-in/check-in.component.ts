@@ -21,6 +21,7 @@ export class CheckInComponent implements OnInit {
     localStorage.setItem("currentUser", JSON.stringify(result));
     this.name.nativeElement.value = JSON.parse(localStorage.getItem("currentUser")).name;
     this.indexService.notifyApplyLocations({
+      name: result.name,
       latitude: position.coords.latitude,
       longitude: position.coords.longitude
     });
