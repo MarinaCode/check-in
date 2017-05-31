@@ -4,8 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "heroku-prebuild": "npm install -g http-server",
-    "heroku-postbuild": "ng build --prod",
+    "heroku-postbuild": "ng build",
     "start": "ng serve && start gulp",
     "build": "ng build",
     "test": "ng test",
@@ -48,5 +47,16 @@
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"
-  }
+  },
+  "description": "check-in",
+  "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarinaCode/check-in.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/MarinaCode/check-in/issues"
+  },
+  "homepage": "https://github.com/MarinaCode/check-in#readme"
 }
