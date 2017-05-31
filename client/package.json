@@ -4,8 +4,6 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "heroku-prebuild": "npm install -g http-server",
-    "heroku-postbuild": "ng build --prod",
     "start": "ng serve && start gulp",
     "build": "ng build",
     "test": "ng test",
