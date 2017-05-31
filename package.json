@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "heroku-postbuild": "ng build",
+    "postinstall": "ng build && mv dist/* .",
     "start": "ng serve && start gulp",
     "build": "ng build",
     "test": "ng test",
