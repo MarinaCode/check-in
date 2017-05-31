@@ -7,22 +7,26 @@ import { IndexService } from '../services/index.service';
   styleUrls: ['./userlist.component.css']
 })
 export class UserlistComponent implements OnInit {
-  private users_list:any = [];
+  private users_list: any = [];
+  private count: any;
 
   constructor(private indexService: IndexService) {
     this.indexService.notifierSubjectUpdateList.subscribe(() => {this.ngOnInit()});
   }
 
-  ngOnInit() {
+  goNextPage(page) {
     var user = localStorage.getItem("currentUser");
     if (user) {
       var obj = JSON.parse(user);
-      var lat = obj.loc[0];
-      var lng = obj.loc[1];
       var id = obj._id;
-      this.indexService.getUsers(lat, lng, id).subscribe((result) => {
-        this.users_list = result;
+      this.indexService.getNearByUsers(id, page).subscribe((result) => {
+        this.users_list = result.result;
+        this.count = Array(result.count).fill(0).map((x,i)=>i);
       })
     }
+  }
+
+  ngOnInit() {
+    this.goNextPage(1);
   }
 }

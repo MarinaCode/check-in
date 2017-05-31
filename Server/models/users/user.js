@@ -17,7 +17,13 @@ const userSchema = new Schema({
 });
 
 const User = mongoose.model('User', userSchema);
-
+/**
+ *
+ * @param name user name for creation
+ * @param lat latitude
+ * @param lng longitude
+ * @returns {*}
+ */
 User.saveData = function(name, lat, lng) {
     var deferred = defer();
     var user = new User({
@@ -32,7 +38,15 @@ User.saveData = function(name, lat, lng) {
     })
     return deferred.promise;
 }
-
+/**
+ *
+ * @param id user id which need to update
+ * @param name user name
+ * @param lat latitude
+ * @param lng longitude
+ * @returns {*}
+ * findOneAndUpdate used for find and immediately update user data
+ */
 User.updateData = function(id, name, lat, lng) {
     var deferred = defer();
     var user = {
@@ -54,20 +68,62 @@ User.updateData = function(id, name, lat, lng) {
 
     return deferred.promise;
 }
-
-User.getUsers = function(lat, lng, id) {
+/**
+ *
+ * @returns {returns All users}
+ */
+User.getUsers = function() {
     var deferred = defer();
-    var allData = [];
-    User.geoNear( [lat, lng], {
-        spherical: true, num: 999,  maxDistance : 1000/6378137,
-        distanceMultiplier: 6378137
-    }).then(result => {
-        var filteredArray = result.filter((el, index, ar) => {
-            return el.obj._id != id;
-        })
-        deferred.resolve(filteredArray)
+    User.find().then(result => {
+        deferred.resolve(result);
     })
     return deferred.promise;
 }
+/**
+ *
+ * @param id user id
+ * @param limit used for pagination
+ * @param skip used for pagination
+ * @returns {*}
+ * $geoNear used for find users within 1km from current user's location.
+ */
+User.getUsersNearby = function(id, limit, skip) {
+    var deferred = defer();
+    User.find({
+            _id: id
 
+    }).then(data => {
+        User.aggregate([
+            {
+                $geoNear: {
+                    near: [data[0].loc[0], data[0].loc[1]],
+                    spherical: true,
+                    distanceField: "dis",
+                    maxDistance : 1000/6378137,
+                    distanceMultiplier: 6378137
+                }
+            },{ "$sort": { "dis": 1}}
+        ]).then(count => {
+            User.aggregate([
+                {
+                    $geoNear: {
+                        near: [data[0].loc[0], data[0].loc[1]],
+                        spherical: true,
+                        distanceField: "dis",
+                        maxDistance : 1000/6378137,
+                        distanceMultiplier: 6378137
+                    }
+                },{ "$sort": { "dis": -1}},
+                {$limit : limit + skip},
+                {$skip : skip}
+            ]).then(result => {
+                deferred.resolve({
+                    count: Math.ceil(count.length/2),
+                    result: result
+                })
+            })
+        })
+    })
+    return deferred.promise;
+}
 module.exports = User;

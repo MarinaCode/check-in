@@ -29,7 +29,6 @@ export class CheckInComponent implements OnInit {
   }
 
   checkIn() {
-
     var name = this.name.nativeElement.value;
     if (name.length > 0 && name.length <= 50 && /^[a-zA-Z]+$/.test(name)) {
       navigator.geolocation.getCurrentPosition((position)=> {

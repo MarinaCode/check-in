@@ -23,8 +23,8 @@ export class IndexService {
     this.notifierSubjectUpdateList.next();
   }
 
-  getUsers(lat, lng, id): Observable<any> {
-    return this.http.post(this.serverUrl + "user/nearby", JSON.stringify({lat: lat, lng: lng, id: id}))
+  getNearByUsers(id, page): Observable<any> {
+    return this.http.get(this.serverUrl + "user/nearby/" + id +"/page/" + page)
       .map(response=> {
         return response.json();
       })

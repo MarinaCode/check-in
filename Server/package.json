@@ -11,6 +11,8 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
+    "gulp": "^3.9.1",
+    "gulp-apidoc": "^0.2.6",
     "htmlspecialchars": "^1.0.5",
     "http": "0.0.0",
     "lodash-node": "^3.10.2",
