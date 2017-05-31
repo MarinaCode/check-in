@@ -21,4 +21,4 @@ npm start
 ```
 You need to have mongoDB
 
-Navigate to http://localhost:3000 for REST calls
+Navigate to http://localhost:3000/check_in/api/v1/user for REST calls
